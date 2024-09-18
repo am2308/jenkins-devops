@@ -25,7 +25,7 @@ Install Jenkins, configure Docker as agent, set up cicd, deploy applications to 
 Pre-Requisites:
  - Java (JDK)
 
-### Run the below commands to install Java and Jenkins
+### Run the below commands to install Java and Jenkins on Ubuntu
 
 Install Java
 
@@ -50,6 +50,30 @@ echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] \
   /etc/apt/sources.list.d/jenkins.list > /dev/null
 sudo apt-get update
 sudo apt-get install jenkins
+```
+
+### Run the below commands to install Java and Jenkins on Amazon Linux AMI 1(Fedora)
+Install Java
+
+```
+sudo yum update
+sudo yum list java*
+sudo yum install java-17-amazon-corretto.x86_64
+```
+
+Verify Java is Installed
+
+```
+java -version
+```
+Now, you can proceed with installing Jenkins
+
+```
+sudo wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo
+sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io-2023.key
+sudo yum install jenkins
+systemctl start jenkins
+systemctl enable jenkins
 ```
 
 **Note: ** By default, Jenkins will not be accessible to the external world due to the inbound traffic restriction by AWS. Open port 8080 in the inbound traffic rules as show below.
