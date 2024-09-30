@@ -14,7 +14,7 @@ pipeline {
         stage('Checkout Code') {
             steps {
                 echo 'Checking out code from Git repository...'
-                git branch: 'main', url: 'https://github.com/username/repo.git'
+                git branch: 'main', url: 'https://github.com/am2308/jenkins-devops.git'
             }
         }
 
@@ -22,7 +22,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building the application...'
-                sh './gradlew build' // For a Java application using Gradle
+                // sh './gradlew build' // For a Java application using Gradle
                 // sh 'mvn clean install' // For a Maven build
                 // sh 'npm install' // For a Node.js application
             }
@@ -32,7 +32,7 @@ pipeline {
         stage('Test') {
             steps {
                 echo 'Running tests...'
-                sh './gradlew test' // Example: Running tests with Gradle
+                // sh './gradlew test' // Example: Running tests with Gradle
                 // sh 'npm test' // For a Node.js project
             }
         }
@@ -41,7 +41,7 @@ pipeline {
         stage('Package') {
             steps {
                 echo 'Packaging the application...'
-                sh "docker build -t ${DOCKER_IMAGE}:${env.BUILD_ID} ."
+                // sh "docker build -t ${DOCKER_IMAGE}:${env.BUILD_ID} ."
             }
         }
 
@@ -58,7 +58,7 @@ pipeline {
         stage('Deploy to Staging') {
             steps {
                 echo 'Deploying the application to staging...'
-                sh "./deploy.sh ${DEPLOY_ENV} ${DOCKER_IMAGE}:${env.BUILD_ID}" // Custom deploy script
+                // sh "./deploy.sh ${DEPLOY_ENV} ${DOCKER_IMAGE}:${env.BUILD_ID}" // Custom deploy script
             }
         }
 
@@ -66,7 +66,7 @@ pipeline {
         stage('Smoke Tests in Staging') {
             steps {
                 echo 'Running smoke tests in staging...'
-                sh './smoke-test.sh' // Example script for automated tests
+                // sh './smoke-test.sh' // Example script for automated tests
             }
         }
 
@@ -80,7 +80,7 @@ pipeline {
             }
             steps {
                 echo 'Deploying the application to production...'
-                sh "./deploy.sh production ${DOCKER_IMAGE}:${env.BUILD_ID}"
+                // sh "./deploy.sh production ${DOCKER_IMAGE}:${env.BUILD_ID}"
             }
         }
     }
@@ -89,7 +89,7 @@ pipeline {
         // Cleanup phase to remove temporary files, containers, or perform any other cleanup steps
         always {
             echo 'Performing cleanup...'
-            sh 'docker system prune -f' // Clean up Docker resources
+            // sh 'docker system prune -f' // Clean up Docker resources
         }
 
         // Send notifications or reports based on success or failure
