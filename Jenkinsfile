@@ -73,11 +73,11 @@ pipeline {
         // Phase 8: Deploy to Production - Deploy the application to the production environment
         stage('Deploy to Production') {
             // Add manual approval before deploying to production
-            when {
-                expression {
-                    return input(message: 'Deploy to production?', ok: 'Deploy') // Requires manual approval
-                }
-            }
+            // when {
+            //    expression {
+            //        return input(message: 'Deploy to production?', ok: 'Deploy') // Requires manual approval
+            //    }
+            //}
             steps {
                 echo 'Deploying the application to production...'
                 // sh "./deploy.sh production ${DOCKER_IMAGE}:${env.BUILD_ID}"
